@@ -1,0 +1,44 @@
+/*
+*	Part of the Oxygen Engine / Sonic 3 A.I.R. software distribution.
+*	Copyright (C) 2017-2026 by Eukaryot
+*
+*	Published under the GNU GPLv3 open source software license, see license.txt
+*	or https://www.gnu.org/licenses/gpl-3.0.en.html
+*/
+
+#pragma once
+
+#include "oxygen/drawing/DrawerInterface.h"
+
+
+namespace softwaredrawer
+{
+	struct Internal;
+}
+
+
+class SoftwareDrawer final : public DrawerInterface
+{
+public:
+	// Drawing commands executed into a texture (not the window) so far: the PSP uses it to know if there's UI to show
+	static inline uint32 mDrawCommandsIntoTextures = 0;
+
+public:
+	SoftwareDrawer();
+	~SoftwareDrawer();
+
+public:
+	inline Drawer::Type getType() override  { return Drawer::Type::SOFTWARE; }
+
+	void createTexture(DrawerTexture& outTexture) override;
+	void refreshTexture(DrawerTexture& texture) override;
+	void setupRenderWindow(SDL_Window* window) override;
+	void performRendering(const DrawCollection& drawCollection) override;
+	void presentScreen() override;
+
+	const BitmapViewMutable<uint32>& getRenderTarget() const;
+	bool needSwapRedBlueChannels() const;
+
+private:
+	softwaredrawer::Internal& mInternal;
+};

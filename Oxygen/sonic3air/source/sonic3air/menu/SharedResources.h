@@ -1,0 +1,53 @@
+/*
+*	Part of the Oxygen Engine / Sonic 3 A.I.R. software distribution.
+*	Copyright (C) 2017-2026 by Eukaryot
+*
+*	Published under the GNU GPLv3 open source software license, see license.txt
+*	or https://www.gnu.org/licenses/gpl-3.0.en.html
+*/
+
+#pragma once
+
+#include <rmxmedia.h>
+#include "oxygen/drawing/DrawerTexture.h"
+
+
+namespace global
+{
+	extern Font mSmallfont;
+	extern Font mSmallfontSemiOutlined;
+	extern Font mSmallfontRect;
+	extern Font mOxyfontNarrowSimple;
+	extern Font mOxyfontNarrow;
+	extern Font mOxyfontTinySimple;
+	extern Font mOxyfontTiny;
+	extern Font mOxyfontTinyRect;
+	extern Font mOxyfontSmallNoOutline;
+	extern Font mOxyfontSmall;
+	extern Font mOxyfontRegular;
+	extern Font mSonicFontB;
+	extern Font mSonicFontC;
+
+	extern DrawerTexture mMainMenuBackgroundSeparator;
+	extern DrawerTexture mDataSelectBackground;
+	extern DrawerTexture mDataSelectAltBackground;
+	extern DrawerTexture mLevelSelectBackground;
+	extern DrawerTexture mOptionsTopBar;
+	extern DrawerTexture mAchievementsFrame;
+	extern DrawerTexture mTimeAttackResultsBG;
+
+	extern std::map<uint32, DrawerTexture> mAchievementImage;
+	extern std::map<uint32, DrawerTexture> mSecretImage;
+
+	void loadSharedResources();
+	// Images only some menus use, in groups: each gets loaded by the menus drawing it (and released while not drawn on the PSP)
+	enum MenuImages
+	{
+		MENU_IMAGES_BACKGROUNDS  = 0x01,	// Data select and level select backgrounds (MenuBackground)
+		MENU_IMAGES_EXTRAS       = 0x02,	// Achievements frame, achievement and secret images
+		MENU_IMAGES_TIME_ATTACK  = 0x04,	// Time Attack results screen
+	};
+	void ensureMenuImages(int groups);
+	void releaseMenuImages(int groups);
+	void releaseUnusedMenuImages();	// (call regularly)
+}

@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Sonic 3 A.I.R. PSP Mod Converter: makes PC mods ready for the PSP port (see README.md).
+       .NET Framework 4.8 is part of Windows 10 and 11, so the tool runs without installing anything. -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AssemblyName>S3AIR-PSP-ModConverter</AssemblyName>
+    <RootNamespace>S3AirPspModConverter</RootNamespace>
+    <Version>1.0.0</Version>
+    <Product>Sonic 3 A.I.R. PSP Mod Converter</Product>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NVorbis" Version="0.10.5" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The ATRAC3 encoder (LGPL 2.1, https://github.com/dcherednik/atracdenc), run as a separate program -->
+    <None Include="atracdenc\atracdenc.exe" Link="atracdenc.exe" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="atracdenc\LICENSE.txt" Link="atracdenc-LICENSE.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="README.md" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
